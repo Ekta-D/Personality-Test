@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Personality Test</string>
+    <string name="failure_message">Due to bad connection, Not able to load data</string>
+</resources>
