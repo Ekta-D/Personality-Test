@@ -44,7 +44,6 @@ public class UnitTesting {
         assertNotNull(presenter);
     }
 
-
     @Test
     public void checkView() {
         GetDataContract.View mGetView = mock(GetDataContract.View.class);
