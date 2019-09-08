@@ -9,7 +9,7 @@ In this MVP architecture is implemented.
 Firebase database used to fetch and save data on server
 
 ## Architecture
-MVP
+MVP(Model View Presenter)
 
 ## Unit tests
 Note that the unit test is placed in /androidTest/ instead of /test/.
