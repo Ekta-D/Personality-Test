@@ -11,4 +11,9 @@ Firebase database used to save data on server
 ## Architecture
 MVP
 
+## Unit tests
+Note that the unit test is placed in /androidTest/ instead of /test/.
+
+This project uses the Gradle build system. You can either benefit from IDEs integration such as Android studio or run the tests on the command line.
+
 
