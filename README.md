@@ -5,10 +5,10 @@ In this application there is list of questions, separated by category.The user c
 This is kind of App to find match as per your personality. 
 In this MVP architecture is implemented.
 
-#Database
+# Database
 Firebase database used to save data on server
 
-#Architecture
+# Architecture
 MVP
 
 
