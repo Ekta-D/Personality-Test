@@ -29,4 +29,8 @@ public interface GetDataContract {
 
         void onFailure(String message);
     }
+
+    interface onDataChange{
+        void onDataupdate(HashMap<String,String>ques_ans);
+    }
 }

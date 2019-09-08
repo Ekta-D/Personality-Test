@@ -10,6 +10,11 @@ import java.util.HashMap;
 public class Presenter implements GetDataContract.onGetDataListener,GetDataContract.Presenter {
     private GetDataContract.View mGetDataView;
     private Intractor mIntractor;
+
+    public  Presenter()
+    {
+
+    }
     public Presenter(GetDataContract.View mGetDataView) {
         this.mGetDataView = mGetDataView;
         mIntractor = new Intractor(this);

@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
     Presenter mPresenter;
     ProgressDialog progressDialog;
     ImageView mSaveInfo;
+    public HashMap<String, String> mSelectedOptions = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(MainActivity.this);
-        signIn();
         if (savedInstanceState != null) {
 
         }
@@ -59,6 +60,16 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
 
 //                Every time user save added info it will create a node to server with its selected information in users node: which you can see on firebase Db
 
+                if (mSelectedOptions != null && mSelectedOptions.size() > 0) {
+                    saveUserData(mSelectedOptions);
+                    if (Utils.mSelectedOptions.size() > 0) {
+                        Utils.mSelectedOptions.clear();
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Please select any option!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -77,7 +88,12 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
 
 
         if (mCategories.size() > 0 && mQues.size() > 0) {
-            adapter = new ExpandableListAdapter(MainActivity.this, mCategories, mQues);
+            adapter = new ExpandableListAdapter(MainActivity.this, mCategories, mQues, new GetDataContract.onDataChange() {
+                @Override
+                public void onDataupdate(HashMap<String, String> ques_ans) {
+                    mSelectedOptions = ques_ans;
+                }
+            });
             mCategoryList.setAdapter(adapter);
 
             adapter.notifyDataSetChanged();
@@ -117,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
         }
     }
 
-    private void signIn() {
-//    FirebaseAuth mAuth=FirebaseAuth.getInstance();
-//    FirebaseUser currnt=mAuth.getCurrentUser();
-//    System.out.println(currnt);
+    private void saveUserData(HashMap<String, String> user_map) {
+        // Unique node id
+        String uuid = UUID.randomUUID().toString();
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+        firebaseDatabase.child("users").child(uuid).setValue(user_map);
     }
-
 }

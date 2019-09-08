@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.android.personalitytest.Core.GetDataContract;
 import com.android.personalitytest.Model.Questions;
 import com.android.personalitytest.R;
 
@@ -18,15 +19,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-
+    private GetDataContract.onDataChange mDataChange;
     private Context mContext;
     private ArrayList<String> mCategories;
     private HashMap<String, ArrayList<Questions>> mQues;
 
-    public ExpandableListAdapter(Context mContext, ArrayList<String> mCategories, HashMap<String, ArrayList<Questions>> mQues) {
+    public ExpandableListAdapter(Context mContext, ArrayList<String> mCategories, HashMap<String, ArrayList<Questions>> mQues, GetDataContract.onDataChange mDataChange) {
         this.mContext = mContext;
         this.mCategories = mCategories;
         this.mQues = mQues;
+        this.mDataChange = mDataChange;
     }
 
     @Override
@@ -105,7 +107,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         RecyclerView optionsList = (RecyclerView) convertView.findViewById(R.id.options_list);
         optionsList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
-        OptionAdapter adapter = new OptionAdapter(mContext, questions.get(childPosition).getmOptions(),questions.get(childPosition).getmQues());
+        OptionAdapter adapter = new OptionAdapter(mContext, questions.get(childPosition).getmOptions(), questions.get(childPosition).getmQues(),mDataChange);
         optionsList.setAdapter(adapter);
 
         TextView txtListChild = (TextView) convertView.findViewById(R.id.ques_textview);

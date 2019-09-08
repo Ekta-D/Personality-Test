@@ -32,6 +32,7 @@ public class Intractor implements GetDataContract.Interactor {
     @Override
     public void initFirebaseConnection(Context context) {
         progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("Fetching your data!");
         progressDialog.show();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("questions");
         databaseReference.addValueEventListener(new ValueEventListener() {

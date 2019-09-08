@@ -8,25 +8,31 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.android.personalitytest.Core.GetDataContract;
 import com.android.personalitytest.R;
+import com.android.personalitytest.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder> {
-
+    GetDataContract.onDataChange mDataChange;
     private RadioButton lastSelected = null;
     private int lastSelectedPos = 0;
     private String mQues = "";
     ArrayList<String> optionsArrayList;
     Context context;
 
-    public OptionAdapter(Context context, ArrayList<String> optionsArrayList, String mQues) {
+
+    public OptionAdapter(Context context, ArrayList<String> optionsArrayList, String mQues, GetDataContract.onDataChange mDataChange) {
         this.context = context;
+        this.mDataChange = mDataChange;
         this.optionsArrayList = optionsArrayList;
         this.mQues = mQues;
+
     }
 
     @NonNull
@@ -39,7 +45,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.textView.setText(optionsArrayList.get(position));
         holder.radioButton.setTag(new Integer(position));
 
@@ -62,7 +68,10 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
                     lastSelectedPos = clickedPos;
                 } else
                     lastSelected = null;
+                Utils.mSelectedOptions.put(mQues, optionsArrayList.get(position));
+                mDataChange.onDataupdate(Utils.mSelectedOptions);
             }
+
         });
     }
 
