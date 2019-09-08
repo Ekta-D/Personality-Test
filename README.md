@@ -6,7 +6,7 @@ This is kind of App to find match as per your personality.
 In this MVP architecture is implemented.
 
 ## Database
-Firebase database used to save data on server
+Firebase database used to fetch and save data on server
 
 ## Architecture
 MVP
