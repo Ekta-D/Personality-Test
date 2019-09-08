@@ -11,14 +11,12 @@ public class Presenter implements GetDataContract.onGetDataListener,GetDataContr
     private GetDataContract.View mGetDataView;
     private Intractor mIntractor;
 
-    public  Presenter()
-    {
-
-    }
     public Presenter(GetDataContract.View mGetDataView) {
         this.mGetDataView = mGetDataView;
         mIntractor = new Intractor(this);
     }
+
+
 
     @Override
     public void onSuccess(String message, ArrayList<String> mCategories, HashMap<String, ArrayList<Questions>> mQues) {

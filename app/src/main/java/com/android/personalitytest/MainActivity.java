@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
                         Utils.mSelectedOptions.clear();
                     }
                     adapter.notifyDataSetChanged();
-                }
-                else{
+                } else {
                     Toast.makeText(MainActivity.this, "Please select any option!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -85,8 +84,6 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
 
     @Override
     public void onGetDataSuccess(ArrayList<String> mCategories, HashMap<String, ArrayList<Questions>> mQues) {
-
-
         if (mCategories.size() > 0 && mQues.size() > 0) {
             adapter = new ExpandableListAdapter(MainActivity.this, mCategories, mQues, new GetDataContract.onDataChange() {
                 @Override
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
         } else {
             mNoDataView.setVisibility(View.VISIBLE);
         }
-
 
     }
 
@@ -122,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
         super.onRestoreInstanceState(savedInstanceState);
         //savedState = savedInstanceState;
         listViewState = savedInstanceState.getParcelable("list_obj");
-
+        mCategoryList.onRestoreInstanceState(listViewState);
     }
 
     @Override

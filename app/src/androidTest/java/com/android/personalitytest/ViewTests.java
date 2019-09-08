@@ -3,6 +3,7 @@ package com.android.personalitytest;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -32,9 +33,12 @@ public class ViewTests {
 
     @Test
     public void ensureListIsPresent() throws Exception {
-        View view = mainActivity.findViewById(R.id.categories_list);
-        assertThat(view, notNullValue());
-        assertThat(view, instanceOf(ExpandableListView.class));
+
+        // Check that list adapter is set and views populated
+        final ExpandableListView expandableListView = (ExpandableListView) mainActivityActivityTestRule.getActivity().findViewById(R.id.categories_list);
+        assertNotNull(expandableListView);
+        assertNotNull(expandableListView.getAdapter());
+        assertNotSame(0, expandableListView.getAdapter().getCount());
 
     }
 
