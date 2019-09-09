@@ -6,7 +6,7 @@ This is kind of App to find match as per your personality.
 In this MVP architecture is implemented.
 
 ## Database
-Firebase database used to fetch and save data on server
+Firebase database used to fetch and save data on server. Every time User click on save button, a new node will be created on server with selected options by user.
 
 ## Architecture
 MVP(Model View Presenter)
